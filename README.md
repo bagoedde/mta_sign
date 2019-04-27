@@ -1,0 +1,1 @@
+The current version of this sign displays all times. I want to get it working to only 30 minutes out.
