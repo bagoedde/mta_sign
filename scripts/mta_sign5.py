@@ -3,8 +3,31 @@ from threading import Thread
 from PIL import ImageFont, ImageDraw, Image
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 import requests, ast, time, datetime, sys
+from queue import Queue
 
-times = []
+queue = Queue(30)
+
+class ProducerThread(Thread):
+
+    def __init__(self,stopid):
+
+        self.stopid = stopid
+
+    def run(self):
+
+        while True:
+
+            global queue
+
+            r = requests.get(f"https://train-sign.herokuapp.com/{stopid.upper()}")
+
+            times = sorted(ast.literal_eval(r.text))
+
+            queue.put(times)
+
+            time.sleep(30)
+
+# ProducerThread().start()
 
 def get_train_times():
 
@@ -73,13 +96,16 @@ def delete_zeros():
     return times
 
 def run():
-    get_train_times()
+
+    ProducerThread.start()
 
     starttime = time.time()
 
     while True:
 
-        global times
+        global queue
+
+        times = queue.get()
 
         logos = []
 
@@ -220,7 +246,6 @@ if __name__ == '__main__':
         # print brightness_arg, interval_arg, display_time_arg
 
         # get_train_times()
-        get_train_times()
         time.sleep(1)
         run()
 
