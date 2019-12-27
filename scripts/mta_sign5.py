@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from threading import Thread
-from PIL import Image, ImageDraw, Image
+from PIL import ImageFont, ImageDraw, Image
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 import requests, ast, time, datetime, sys
 
@@ -87,7 +87,7 @@ def run():
 
         # times = strip_zeros()
 
-        for i in range(len(times)):
+        for i in times:
 
             #Get the train letter/number
             train_id = i[1]
@@ -102,8 +102,7 @@ def run():
             train_id = train_id.lower()
 
             #Set font
-            font = Image.truetype('../fonts/piboto/Piboto-Light.ttf',13)
-
+            font = ImageFont.truetype('../fonts/piboto/Piboto-Light.ttf',13)
             #Create blank image
             image = Image.new("RGB", (128, 16))  # Can be larger than matrix if wanted!!
 
