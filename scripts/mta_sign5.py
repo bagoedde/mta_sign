@@ -13,6 +13,8 @@ class ProducerThread(Thread):
 
         self.stopid = stopid
 
+        super(ProducerThread, self).__init__()
+
     def run(self):
 
         while True:
@@ -97,7 +99,9 @@ def delete_zeros():
 
 def run():
 
-    ProducerThread.start()
+    thread = ProducerThread
+    thread.start()
+
 
     starttime = time.time()
 
@@ -246,7 +250,7 @@ if __name__ == '__main__':
         # print brightness_arg, interval_arg, display_time_arg
 
         # get_train_times()
-        time.sleep(1)
+        # time.sleep(1)
         run()
 
 
