@@ -107,7 +107,7 @@ def run(stopid):
 
     while True:
 
-        r = requests.get(f"https://train-sign.herokuapp.com/{self.stopid.upper()}")
+        r = requests.get(f"https://train-sign.herokuapp.com/{stopid.upper()}")
 
         times = sorted(ast.literal_eval(r.text))
 
