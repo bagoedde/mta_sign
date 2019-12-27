@@ -97,9 +97,9 @@ def delete_zeros():
 
     return times
 
-def run():
+def run(stopid):
 
-    thread = ProducerThread
+    thread = ProducerThread(stopid)
     thread.start()
 
 
@@ -251,7 +251,7 @@ if __name__ == '__main__':
 
         # get_train_times()
         # time.sleep(1)
-        run()
+        run('q04s')
 
 
 
