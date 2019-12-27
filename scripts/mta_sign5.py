@@ -101,7 +101,7 @@ def run():
 
     # thread = ProducerThread(stopid)
     # thread.start()
-
+    matrix = initialize_matrix(brightness_arg)
 
     starttime = time.time()
 
@@ -171,8 +171,6 @@ def run():
             logos.append(logo)
 
             images.append(image)
-
-        matrix = initialize_matrix(brightness_arg)
 
         matrix.Clear()
 
