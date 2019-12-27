@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 from threading import Thread
 from PIL import Image, ImageDraw, Image
-# from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 import requests, ast, time, datetime, sys
 
 times = None
-brightness=brightness_arg
-interval=interval_arg
-display_time=display_time_arg
+
+# brightness=brightness_arg
+# interval=interval_arg
+# display_time=display_time_arg
+
 def get_train_times():
 
     def run_get_times():
@@ -76,6 +78,8 @@ def delete_zeros():
 
 def run():
 
+    starttime = time.time()
+
     while True:
 
         global times
@@ -140,7 +144,7 @@ def run():
 
             images.append(image)
 
-        matrix = initialize_matrix(brightness)
+        matrix = initialize_matrix(brightness_arg)
 
         matrix.Clear()
 
@@ -156,7 +160,7 @@ def run():
 
                 pos += 1
 
-            time.sleep(interval - ((time.time() - starttime) % interval))
+            time.sleep(interval_arg - ((time.time() - starttime) % interval_arg))
 
 
         else:
@@ -171,7 +175,7 @@ def run():
 
                 count = 0
 
-                while count <=interval/display_time:
+                while count <=interval_arg/display_time_arg:
 
                     matrix.SetImage(images[(count%len(images))], 0,17)
 
@@ -181,7 +185,7 @@ def run():
 
                     count += 1
 
-                    time.sleep(display_time)
+                    time.sleep(display_time_arg)
 
 def print_times():
 
@@ -207,8 +211,7 @@ if __name__ == '__main__':
 
     if len(sys.argv[1:]) != 3:
 
-        print
-        'must include 3 arguments: brightness, refresh interval, and display time interval'
+        print('must include 3 arguments: brightness, refresh interval, and display time interval')
 
     else:
 
@@ -218,8 +221,7 @@ if __name__ == '__main__':
 
         display_time_arg = float(sys.argv[3])
 
-        print
-        brightness_arg, interval_arg, display_time_arg
+        # print brightness_arg, interval_arg, display_time_arg
 
         run()
 
