@@ -111,6 +111,8 @@ def run(stopid):
 
         times = queue.get()
 
+        times = [i for i in times if i[0] != "00"]
+
         logos = []
 
         images = []
@@ -124,7 +126,7 @@ def run(stopid):
 
             #Strip leading zeros and double zeros
 
-            minutes = i[0]
+            minutes = i[0].lstrip('0')
 
             # minutes = minutes.lstrip('0')
 
