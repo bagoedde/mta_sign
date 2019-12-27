@@ -97,7 +97,7 @@ def delete_zeros():
 
     return times
 
-def run():
+def run(stopid):
 
     # thread = ProducerThread(stopid)
     # thread.start()
@@ -107,17 +107,15 @@ def run():
 
     while True:
 
-        global queue
+        r = requests.get(f"https://train-sign.herokuapp.com/{self.stopid.upper()}")
 
-        times = queue.get()
+        times = sorted(ast.literal_eval(r.text))
 
         times = [i for i in times if i[0] != "00"]
 
         logos = []
 
         images = []
-
-        # times = strip_zeros()
 
         for i in times:
 
@@ -251,9 +249,9 @@ if __name__ == '__main__':
 
         # get_train_times()
         # time.sleep(1)
-        thread = ProducerThread('q04s')
-        thread.start()
-        run()
+        # thread = ProducerThread('q04s')
+        # thread.start()
+        run('q04s')
 
 
 
