@@ -4,19 +4,15 @@ from PIL import Image, ImageDraw, Image
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 import requests, ast, time, datetime, sys
 
-times = None
-
-# brightness=brightness_arg
-# interval=interval_arg
-# display_time=display_time_arg
+times = []
 
 def get_train_times():
 
     def run_get_times():
 
-        global times
-
         while True:
+
+            global times
 
             r = requests.get("https://train-sign.herokuapp.com/Q04S")
 
@@ -77,6 +73,7 @@ def delete_zeros():
     return times
 
 def run():
+    get_train_times()
 
     starttime = time.time()
 
@@ -165,27 +162,27 @@ def run():
 
         else:
 
-                matrix.SetImage(images[0], 0,3)
+            matrix.SetImage(images[0], 0,3)
 
-                matrix.SetImage(logos[0], 3,2)
+            matrix.SetImage(logos[0], 3,2)
 
-                images = images[1:]
+            images = images[1:]
 
-                logos = logos[1:]
+            logos = logos[1:]
 
-                count = 0
+            count = 0
 
-                while count <=interval_arg/display_time_arg:
+            while count <= interval_arg/display_time_arg:
 
-                    matrix.SetImage(images[(count%len(images))], 0,17)
+                matrix.SetImage(images[(count%len(images))], 0,17)
 
-                    matrix.SetImage(logos[(count%len(images))], 3,17)
+                matrix.SetImage(logos[(count%len(images))], 3,17)
 
-                    #print 'count % len(images) = ' + str(count%len(images))
+                #print 'count % len(images) = ' + str(count%len(images))
 
-                    count += 1
+                count += 1
 
-                    time.sleep(display_time_arg)
+                time.sleep(display_time_arg)
 
 def print_times():
 
@@ -223,7 +220,7 @@ if __name__ == '__main__':
 
         # print brightness_arg, interval_arg, display_time_arg
 
-        get_train_times()
+        # get_train_times()
 
         run()
 
