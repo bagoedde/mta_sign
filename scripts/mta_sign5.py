@@ -110,7 +110,7 @@ def run():
 
 
             #Set logo based on train_id above
-            imagePath = f'../images/{train_id}logo.jpg'
+            imagePath = '../images/%slogo.jpg' % train_id
 
             logo = Image.open(imagePath).convert('RGB')
 
