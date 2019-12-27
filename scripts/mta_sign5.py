@@ -30,7 +30,7 @@ def get_train_times():
 
     thread.start()
 
-get_train_times()
+# get_train_times()
 
 def initialize_matrix(brightness):
 
@@ -222,6 +222,8 @@ if __name__ == '__main__':
         display_time_arg = float(sys.argv[3])
 
         # print brightness_arg, interval_arg, display_time_arg
+
+        get_train_times()
 
         run()
 
