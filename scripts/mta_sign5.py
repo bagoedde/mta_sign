@@ -121,7 +121,7 @@ def run():
             draw.text((25,-3),'Brooklyn',font=font,fill='#239600')
             ##FFD302
 
-            if i < 2:
+            if times.index(i) < 2:
 
                 #Get width of minutes text
                 timewidth = draw.textsize(minutes)[0]
