@@ -221,7 +221,8 @@ if __name__ == '__main__':
         # print brightness_arg, interval_arg, display_time_arg
 
         # get_train_times()
-
+        get_train_times()
+        time.sleep(1)
         run()
 
 
