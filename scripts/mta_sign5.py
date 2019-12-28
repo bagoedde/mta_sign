@@ -4,10 +4,11 @@ from PIL import ImageFont, ImageDraw, Image
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 import requests, ast, time, datetime, sys
 from queue import Queue
+from multiprocessing import Process, Queue
 
 queue = Queue(30)
 
-class ProducerThread(Thread):
+class ProducerThread(Process):
 
     def __init__(self,stopid):
 
@@ -99,17 +100,17 @@ def delete_zeros():
 
 def run(stopid):
 
-    # thread = ProducerThread(stopid)
-    # thread.start()
+    thread = ProducerThread(stopid)
+    thread.start()
     matrix = initialize_matrix(brightness_arg)
 
     starttime = time.time()
 
     while True:
 
-        r = requests.get(f"https://train-sign.herokuapp.com/{stopid.upper()}")
-
-        times = sorted(ast.literal_eval(r.text))
+        # r = requests.get(f"https://train-sign.herokuapp.com/{stopid.upper()}")
+        #
+        # times = sorted(ast.literal_eval(r.text))
 
         times = [i for i in times if i[0] != "00"]
 
