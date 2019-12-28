@@ -98,14 +98,14 @@ def delete_zeros():
 
     return times
 
-def run():
-
+def run(min,max):
 
     matrix = initialize_matrix(brightness_arg)
 
     starttime = time.time()
 
     while True:
+
         global queue
         # r = requests.get(f"https://train-sign.herokuapp.com/{stopid.upper()}")
         #
@@ -114,6 +114,11 @@ def run():
         times = queue.get()
 
         times = [i for i in times if i[0] != "00"]
+
+        for i in times:
+            i[0] = i[0].lstrip('0')
+
+        times = [i for i in times if int(i[0]) >= min and int(i[0]) <= max]
 
         logos = []
 
@@ -253,7 +258,7 @@ if __name__ == '__main__':
         # time.sleep(1)
         thread = ProducerThread('q04s')
         thread.start()
-        run()
+        run(6,30)
 
 
 
