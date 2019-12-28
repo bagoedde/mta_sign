@@ -107,10 +107,12 @@ def run(stopid):
     starttime = time.time()
 
     while True:
-
+        global queue
         # r = requests.get(f"https://train-sign.herokuapp.com/{stopid.upper()}")
         #
         # times = sorted(ast.literal_eval(r.text))
+
+        times = queue.get()
 
         times = [i for i in times if i[0] != "00"]
 
