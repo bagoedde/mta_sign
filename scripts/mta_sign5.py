@@ -98,10 +98,9 @@ def delete_zeros():
 
     return times
 
-def run(stopid):
+def run():
 
-    thread = ProducerThread(stopid)
-    thread.start()
+
     matrix = initialize_matrix(brightness_arg)
 
     starttime = time.time()
@@ -252,9 +251,9 @@ if __name__ == '__main__':
 
         # get_train_times()
         # time.sleep(1)
-        # thread = ProducerThread('q04s')
-        # thread.start()
-        run('q04s')
+        thread = ProducerThread('q04s')
+        thread.start()
+        run()
 
 
 
